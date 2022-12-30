@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import e from "cors";
 
 //Get user from localstorage
-
 const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
@@ -17,14 +15,19 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    reset: (state) => {},
+    reset: (state) => {
+      state.isError = false;
+      state.isSuccess = false;
+      state.isLoading = false;
+      state.message = "";
+    },
   },
   extraReducers: () => {},
 });
 
 const {
   actions: { reset },
-  reducer,
+  reducer: authReducer,
 } = authSlice;
 
-export { authSlice, reducer, reset };
+export { authSlice, authReducer, reset };
